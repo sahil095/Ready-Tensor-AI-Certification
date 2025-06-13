@@ -1,0 +1,10 @@
+langchain
+langchain-community
+pypdf
+faiss-cpu
+sentence-transformers
+streamlit
+gradio
+tqdm
+chromadb
+langchain-chroma
