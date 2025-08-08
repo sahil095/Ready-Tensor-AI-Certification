@@ -1,4 +1,4 @@
-llm: "gpt-4o-mini"
+llm: "gemma2-9b-it"
 
 reasoning_strategies:
   CoT: |
@@ -15,7 +15,7 @@ reasoning_strategies:
     3. Observation: What happened? What did I learn?
     4. Reflection: Do I have enough information to provide my final answer, or should I try a different approach?
 
-    (Repeat steps 1–4 as needed)
+    (Repeat steps 1-4 as needed)
 
     Then provide your final answer.
 

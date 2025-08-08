@@ -37,7 +37,7 @@ summarization_prompt_cfg4:
     - No buzzwords like “transformative” or “game-changer”
     - Avoid overly polished terms like “delves into,” “showcasing,” or leverages
     - Avoid clichés like “in the realm of,” “ushering in,” or “a new era of”
-    - Don’t use em dashes (—) or semicolons
+    - Don't use em dashes (—) or semicolons
     - Favor short, clear sentences over long compound ones
 
 summarization_prompt_cfg5:
@@ -58,7 +58,7 @@ summarization_prompt_cfg5:
     - No buzzwords like “transformative” or “game-changer”
     - Avoid overly polished terms like “delves into,” “showcasing,” or "leverages"
     - Avoid clichés like “in the realm of,” “ushering in,” or “a new era of”
-    - Don’t use em dashes (—) or semicolons
+    - Don't use em dashes (—) or semicolons
     - Favor short, clear sentences over long compound ones
   goal: |
     Help a curious non-expert decide whether this publication is worth reading in full.
@@ -81,7 +81,7 @@ summarization_prompt_cfg6:
     - No buzzwords like “transformative” or “game-changer”
     - Avoid overly polished terms like “delves into,” “showcasing,” or "leverages"
     - Avoid clichés like “in the realm of,” “ushering in,” or “a new era of”
-    - Don’t use em dashes (—) or semicolons
+    - Don't use em dashes (—) or semicolons
     - Favor short, clear sentences over long compound ones
   goal: |
     Help a curious non-expert decide whether this publication is worth reading in full.

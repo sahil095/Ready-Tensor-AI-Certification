@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 from typing import Optional, Dict, Any
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
 
 sys.path.append(str(Path(__file__).parent.parent))
@@ -11,9 +12,10 @@ from utils import load_publication, load_yaml_config, load_env, save_text_to_fil
 from paths import PROMPT_CONFIG_FPATH, OUTPUTS_DIR, APP_CONFIG_FPATH
 from prompt_builder import build_prompt_from_config
 
+groq_model_str = "gemma2-9b-it"
 
 def invoke_llm(
-    prompt: str, model: str = "gpt-4o-mini", temperature: float = 0.0
+    prompt: str, model: str = groq_model_str, temperature: float = 0.0
 ) -> Optional[str]:
     """Calls the LLM with a prompt and returns the response.
 
@@ -26,10 +28,15 @@ def invoke_llm(
         The LLM's response content, or None if an error occurs.
     """
     try:
-        llm = ChatOpenAI(
+        # llm = ChatOpenAI(
+        #     model_name=model,
+        #     temperature=temperature,
+        #     api_key=os.getenv("GROQ_API_KEY"),
+        # )
+        llm = ChatGroq(
             model_name=model,
             temperature=temperature,
-            api_key=os.getenv("OPENAI_API_KEY"),
+            api_key=os.getenv("GROQ_API_KEY"),
         )
         message = HumanMessage(content=prompt)
         response = llm.invoke([message])
@@ -102,7 +109,7 @@ def main(prompt_config_key: str) -> None:
 
         print("Loading application configuration...")
         app_config = load_yaml_config(APP_CONFIG_FPATH)
-        model_name = app_config.get("llm", "gpt-4o-mini")
+        model_name = app_config.get("llm", groq_model_str)
         print(f"✓ Model set to: {model_name}")
 
         # Load the prompt configuration
