@@ -21,6 +21,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.vscode/
 
 .DS_Store
 test.ipynb
@@ -31,3 +32,4 @@ test.py
 
 code/
 outputs/
+Module1-Project/
