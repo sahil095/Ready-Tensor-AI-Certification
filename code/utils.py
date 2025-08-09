@@ -3,8 +3,9 @@ import yaml
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import Union, Optional
+import yaml
 
-from paths import PUBLICATION_FPATH, ENV_FPATH
+from paths import PUBLICATION_FPATH, ENV_FPATH, CONFIG_FILE_PATH
 
 
 def load_publication():
@@ -103,3 +104,9 @@ def save_text_to_file(
 
     except IOError as e:
         raise IOError(f"Error writing to file {filepath}: {e}") from e
+
+
+
+def load_config(config_path: str = CONFIG_FILE_PATH):
+    with open(config_path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
