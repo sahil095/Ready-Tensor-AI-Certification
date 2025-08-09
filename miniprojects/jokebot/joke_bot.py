@@ -7,17 +7,53 @@ from langgraph.graph.state import CompiledStateGraph
 
 
 
+# ===================
+# Define State
+# ===================
+
 class Joke(BaseModel):
     text: str
     category: str
 
 class JokeState(BaseModel):
+    """
+    Represents the evolving state of the joke bot.
+    """
     jokes: Annotated[List[Joke], add] = []
     jokes_choice: Literal["n", "c", "q"] = "n" # next joke, change category, or quit
     category: str = "neutral"
     language: str = "en"
     quit: bool = False
 
+
+# ===================
+# Utilities
+# ===================
+
+def get_user_input(prompt: str) -> str:
+    return input(prompt).strip().lower()
+
+def print_joke(joke: Joke):
+    """Print a joke with nice formatting."""
+    # print(f"\n📂 CATEGORY: {joke.category.upper()}\n")
+    print(f"\n😂 {joke.text}\n")
+    print("=" * 60)
+
+def print_menu_header(category: str, total_jokes: int):
+    """Print a compact menu header."""
+    print(f"🎭 Menu | Category: {category.upper()} | Jokes: {total_jokes}")
+    print("-" * 50)
+
+def print_category_menu():
+    """Print a nicely formatted category selection menu."""
+    print("📂" + "=" * 58 + "📂")
+    print("    CATEGORY SELECTION")
+    print("=" * 60)
+
+
+# ===================
+# Define Nodes
+# ===================
 
 def show_menu(state: JokeState) -> dict:
     user_input = input("[n] Next  [c] Category  [q] Quit\n> ").strip().lower()
@@ -43,6 +79,10 @@ def exit_bot(state: JokeState) -> dict:
 
 
 def route_choice(state: JokeState) -> str:
+    """
+    Router function to determine the next node based on user choice.
+    Keys must match the target node names.
+    """
     if state.jokes_choice == "n":
         return "fetch_joke"
     elif state.jokes_choice == "c":
@@ -52,6 +92,10 @@ def route_choice(state: JokeState) -> str:
     return "exit_bot"
 
 
+
+# ===================
+# Build Graph
+# ===================
 
 def build_joke_graph() -> CompiledStateGraph:
     workflow = StateGraph(JokeState)
@@ -79,6 +123,10 @@ def build_joke_graph() -> CompiledStateGraph:
 
     return workflow.compile()
 
+
+# ===================
+# Main Entry
+# ===================
 
 def main():
     graph = build_joke_graph()
